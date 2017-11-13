@@ -1,7 +1,7 @@
 FROM php:7.1-apache
 
-ENV NOVOSGA_VER v2.0.0-BETA2
-ENV NOVOSGA_MD5 2ce674a0c9ce97473fd9064f23b12e26
+ENV NOVOSGA_VER v2.0.0-BETA3
+ENV NOVOSGA_MD5 d8d05e4cb386570f18b33339207529fa
 ENV NOVOSGA_URL https://github.com/novosga/novosga/archive/${NOVOSGA_VER}.tar.gz
 ENV NOVOSGA_FILE novosga.tar.gz
 ENV NOVOSGA_DIR /var/www/novosga
