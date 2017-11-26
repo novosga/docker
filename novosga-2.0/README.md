@@ -15,8 +15,8 @@ You can set the system as you like with environment variables (using docker-comp
 | Option                         | Default setting   | Description                      | Optional? |
 | ------------------------------ | ----------------- | -------------------------------- | :-------: |
 | APP_ENV                        | prod              | Environment running the app      | yes       |
-| DATABASE_URL                   | *blank*             | Database connection string       | ***no***      |
-| DATABASE_PASS                  | *blank*             | Database password                | ***no***      |
+| DATABASE_URL                   | *blank*           | Database connection string       | ***no***  |
+| DATABASE_PASS                  | *blank*           | Database password                | ***no***  |
 | NOVOSGA_ADMIN_USERNAME         | admin             | Admin username                   | yes       |
 | NOVOSGA_ADMIN_PASSWORD         | 123456            | Admin password                   | yes       |
 | NOVOSGA_ADMIN_FIRSTNAME        | Administrator     | Administrator first name         | yes       |
