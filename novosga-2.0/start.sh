@@ -18,9 +18,9 @@ fi
 echo "Ok"
 
 # we need to wait until the database is up and accepting connections
-until bin/console -q doctrine:query:sql "select version()" > /dev/null 2>&1; do 
-    echo "Waiting for database..."; 
-    sleep 5; 
+until bin/console -q doctrine:query:sql "select version()" > /dev/null 2>&1; do
+    echo "Waiting for database...";
+    sleep 5;
 done
 
 echo "Database is up, configuring schema"
@@ -30,8 +30,5 @@ set -xe
 #Install/Updates the database schema
 /var/www/html/bin/console novosga:install
 
-#Ensures all files have the right owner
-chown -R www-data:www-data /var/www/html/*
-
 echo "Setup done! Starting apache"
-exec apache2-foreground
+exec /usr/bin/supervisord -n

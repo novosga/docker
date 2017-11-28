@@ -35,6 +35,7 @@ Minimal setting:
 
 ```shell
  docker container run [--rm|-d] \
+  -p 80:80 -p 2020:2020
   -e DATABASE_URL="connection_string" \
   -e DATABASE_PASS="database_password" \
   novosga/novosga:latest
@@ -53,6 +54,7 @@ services:
       - mysqldb
     ports:
       - "80:80"
+      - "2020:2020"
     environment:
       APP_ENV: 'prod'
       # database connection
@@ -74,8 +76,9 @@ services:
       NOVOSGA_PRIORITY_DESCRIPTION: 'Priority service'
       # default place
       NOVOSGA_PLACE_NAME: 'Box'
-      # Set TimeZone
+      # Set TimeZone and locale
       TZ: 'America/Sao_Paulo'
+      LANGUAGE: 'pt_BR'
   mysqldb:
     image: mysql:5.7
     restart: always

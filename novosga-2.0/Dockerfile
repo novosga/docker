@@ -1,13 +1,13 @@
 #Build stage, useful for a better use of cache ;)
 FROM composer:1.5.2 AS build
 
-ENV NOVOSGA_VER=v2.0.0-BETA3 \
-    NOVOSGA_MD5=d8d05e4cb386570f18b33339207529fa
+ENV NOVOSGA_VER=v2.0.0-BETA5 \
+    NOVOSGA_MD5=7f5c9e9cc2dc0f2f7d50a8105db068f7
 
 ENV NOVOSGA_FILE=novosga.tar.gz \
     NOVOSGA_DIR=/var/www/html \
-    APP_ENV=prod \
     NOVOSGA_URL=https://github.com/novosga/novosga/archive/${NOVOSGA_VER}.tar.gz \
+    APP_ENV=prod \
     DATABASE_PASS=123456 \
     DATABASE_URL=mysql://root@127.0.0.1:3306/novosga?charset=utf8mb4&serverVersion=5.7
 
@@ -28,7 +28,9 @@ RUN set -xe \
         libicu-dev \
         libxml2-dev \
         zlib1g-dev \
+        supervisor \
     && docker-php-ext-install \
+        gettext \
         intl \
         pcntl \
         pdo \
@@ -50,18 +52,11 @@ COPY --from=build /var/www/html /var/www/html
 
 RUN set -xe \
     && chown -R www-data:www-data . \
-    && sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
-    && echo \
-'Options -MultiViews\n\
-RewriteEngine On\n\
-RewriteCond %{REQUEST_FILENAME} !-f\n\
-RewriteRule ^(.*)$ index.php [QSA,L]\n\
-PassEnv APP_ENV\n\
-PassEnv DATABASE_URL\n\
-PassEnv DATABASE_PASS' > public/.htaccess
+    && sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
 #Set the default parameters
 ENV APP_ENV=prod \
+    LANGUAGE=pt_BR \
     NOVOSGA_ADMIN_USERNAME="admin" \
     NOVOSGA_ADMIN_PASSWORD="123456" \
     NOVOSGA_ADMIN_FIRSTNAME="Administrator" \
@@ -74,6 +69,9 @@ ENV APP_ENV=prod \
     NOVOSGA_PRIORITY_DESCRIPTION="Priority service" \
     NOVOSGA_PLACE_NAME="Box"
 
-    COPY start.sh /usr/local/bin
+COPY start.sh /usr/local/bin
+COPY apache2/htaccess public/.htaccess
+COPY supervisor/apache2.conf /etc/supervisor/conf.d/apache2.conf
+COPY supervisor/websocket.conf /etc/supervisor/conf.d/websocket.conf
 
-    CMD ["start.sh"]
+CMD ["start.sh"]
