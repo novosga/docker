@@ -1,8 +1,8 @@
 #Build stage, useful for a better use of cache ;)
 FROM composer:1.5.2 AS build
 
-ENV NOVOSGA_VER=v2.0.0-BETA5 \
-    NOVOSGA_MD5=7f5c9e9cc2dc0f2f7d50a8105db068f7
+ENV NOVOSGA_VER=v2.0.0-BETA6 \
+    NOVOSGA_MD5=20b3f7dd8c18eaefa0d3c137cece9e30
 
 ENV NOVOSGA_FILE=novosga.tar.gz \
     NOVOSGA_DIR=/var/www/html \
