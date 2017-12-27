@@ -4,15 +4,7 @@ echo "Starting pre-flight check..."
 echo -n "Database url: "
 if [ -z "$DATABASE_URL" ]; then
     echo "\nYou need to tell me where the database is and how to connect to it by setting DATABASE_URL environment variable"
-    echo "e.g.: Using the flag -e DATABASE_URL='mysql://root@127.0.0.1:3306/novosga?charset=utf8mb4&serverVersion=5.7' at docker container run"
-    exit 1
-fi
-echo "Ok"
-
-echo -n "Database password: "
-if [ -z "$DATABASE_PASS" ]; then
-    echo "\nYou need to tell me the database password by setting DATABASE_PASS environment variable"
-    echo "e.g.: Using the flag -e DATABASE_PASS='password' at docker container run"
+    echo "e.g.: Using the flag -e DATABASE_URL='mysql://user:pass@127.0.0.1:3306/dbname?charset=utf8mb4&serverVersion=5.7' at docker container run"
     exit 1
 fi
 echo "Ok"

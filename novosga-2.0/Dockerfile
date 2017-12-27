@@ -1,15 +1,14 @@
 #Build stage, useful for a better use of cache ;)
 FROM composer:1.5.2 AS build
 
-ENV NOVOSGA_VER=v2.0.0-BETA6 \
-    NOVOSGA_MD5=20b3f7dd8c18eaefa0d3c137cece9e30
+ENV NOVOSGA_VER=v2.0.0-RC1 \
+    NOVOSGA_MD5=0dd02c1901116916829114ccdd5357ff
 
 ENV NOVOSGA_FILE=novosga.tar.gz \
     NOVOSGA_DIR=/var/www/html \
     NOVOSGA_URL=https://github.com/novosga/novosga/archive/${NOVOSGA_VER}.tar.gz \
     APP_ENV=prod \
-    DATABASE_PASS=123456 \
-    DATABASE_URL=mysql://root@127.0.0.1:3306/novosga?charset=utf8mb4&serverVersion=5.7
+    DATABASE_URL=mysql://root:123456@127.0.0.1:3306/novosga?charset=utf8mb4&serverVersion=5.7
 
 RUN set -xe \
     && mkdir -p $NOVOSGA_DIR && cd $NOVOSGA_DIR \

@@ -16,7 +16,6 @@ You can set the system as you like with environment variables (using docker-comp
 | ------------------------------ | ----------------- | -------------------------------- | :-------: |
 | APP_ENV                        | prod              | Environment running the app      | yes       |
 | DATABASE_URL                   | *blank*           | Database connection string       | ***no***  |
-| DATABASE_PASS                  | *blank*           | Database password                | ***no***  |
 | NOVOSGA_ADMIN_USERNAME         | admin             | Admin username                   | yes       |
 | NOVOSGA_ADMIN_PASSWORD         | 123456            | Admin password                   | yes       |
 | NOVOSGA_ADMIN_FIRSTNAME        | Administrator     | Administrator first name         | yes       |
@@ -37,7 +36,6 @@ Minimal setting:
  docker container run [--rm|-d] \
   -p 80:80 -p 2020:2020
   -e DATABASE_URL="connection_string" \
-  -e DATABASE_PASS="database_password" \
   novosga/novosga:latest
 ```
 
@@ -58,8 +56,7 @@ services:
     environment:
       APP_ENV: 'prod'
       # database connection
-      DATABASE_URL: 'mysql://novosga@mysqldb:3306/novosga2?charset=utf8mb4&serverVersion=5.7'
-      DATABASE_PASS: 'MySQL_App_P@ssW0rd!'
+      DATABASE_URL: 'mysql://novosga:MySQL_App_P4ssw0rd!@mysqldb:3306/novosga2?charset=utf8mb4&serverVersion=5.7'
       # default admin user
       NOVOSGA_ADMIN_USERNAME: 'admin'
       NOVOSGA_ADMIN_PASSWORD: '123456'
@@ -85,6 +82,6 @@ services:
     environment:
       MYSQL_USER: 'novosga'
       MYSQL_DATABASE: 'novosga2'
-      MYSQL_ROOT_PASSWORD: 'MySQL_r00t_P@ssW0rd!'
-      MYSQL_PASSWORD: 'MySQL_App_P@ssW0rd!'
+      MYSQL_ROOT_PASSWORD: 'MySQL_r00t_P4ssW0rd!'
+      MYSQL_PASSWORD: 'MySQL_App_P4ssw0rd!'
 ```
