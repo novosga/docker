@@ -1,8 +1,8 @@
 #Build stage, useful for a better use of cache ;)
 FROM composer:1.5.2 AS build
 
-ENV NOVOSGA_VER=v2.0.0-RC1 \
-    NOVOSGA_MD5=0dd02c1901116916829114ccdd5357ff
+ENV NOVOSGA_VER=v2.0.0-RC2 \
+    NOVOSGA_MD5=f99b6b6abe2f01a4e3d6cf8f6d567743
 
 ENV NOVOSGA_FILE=novosga.tar.gz \
     NOVOSGA_DIR=/var/www/html \
@@ -17,7 +17,7 @@ RUN set -xe \
     && echo "${NOVOSGA_MD5}  ${NOVOSGA_FILE}" | md5sum -c \
     && tar -xz --strip-components=1 -f ${NOVOSGA_FILE} \
     && rm ${NOVOSGA_FILE} \
-    && composer install --no-dev
+    && composer install --no-dev -o
 
 FROM php:7.1-apache
 
