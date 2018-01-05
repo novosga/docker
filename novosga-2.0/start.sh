@@ -9,6 +9,9 @@ if [ -z "$DATABASE_URL" ]; then
 fi
 echo "Ok"
 
+bin/console cache:clear --no-debug --no-warmup
+bin/console cache:warmup
+
 # we need to wait until the database is up and accepting connections
 until bin/console -q doctrine:query:sql "select version()" > /dev/null 2>&1; do
     echo "Waiting for database...";
