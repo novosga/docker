@@ -1,14 +1,14 @@
 #Build stage, useful for a better use of cache ;)
-FROM composer:1.5.2 AS build
+FROM composer:1.6.3 AS build
 
-ENV NOVOSGA_VER=v2.0.0-RC2 \
-    NOVOSGA_MD5=f99b6b6abe2f01a4e3d6cf8f6d567743
+ENV NOVOSGA_VER=v2.0.0-RC3 \
+    NOVOSGA_MD5=9b88758980fa862d7f75a29831f8bc7c
 
 ENV NOVOSGA_FILE=novosga.tar.gz \
     NOVOSGA_DIR=/var/www/html \
     NOVOSGA_URL=https://github.com/novosga/novosga/archive/${NOVOSGA_VER}.tar.gz \
     APP_ENV=prod \
-    DATABASE_URL=mysql://root:123456@127.0.0.1:3306/novosga?charset=utf8mb4&serverVersion=5.7
+    DATABASE_URL=mysql://127.0.0.1:3306/novosga?charset=utf8mb4&serverVersion=5.7
 
 RUN set -xe \
     && mkdir -p $NOVOSGA_DIR && cd $NOVOSGA_DIR \
@@ -29,7 +29,6 @@ RUN set -xe \
         zlib1g-dev \
         supervisor \
     && docker-php-ext-install \
-        gettext \
         intl \
         pcntl \
         pdo \
