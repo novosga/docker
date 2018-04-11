@@ -84,4 +84,6 @@ services:
       MYSQL_DATABASE: 'novosga2'
       MYSQL_ROOT_PASSWORD: 'MySQL_r00t_P4ssW0rd!'
       MYSQL_PASSWORD: 'MySQL_App_P4ssw0rd!'
+      # Set TimeZone
+      TZ: 'America/Sao_Paulo'
 ```
