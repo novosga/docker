@@ -22,7 +22,7 @@ docker container run -d \
    -e DATABASE_PASSWORD="dbpass" \
    -e DATABASE_SGDB="mysql or postgres" \
    -p 80:80 \
-   somatorio/novosga
+   novosga/novosga:1.x
 ```
 
 
