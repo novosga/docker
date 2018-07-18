@@ -1,8 +1,8 @@
 #Build stage, useful for a better use of cache ;)
 FROM composer:1.6.3 AS build
 
-ENV NOVOSGA_VER=v2.0.0-RC3 \
-    NOVOSGA_MD5=9b88758980fa862d7f75a29831f8bc7c
+ENV NOVOSGA_VER=v2.0.0 \
+    NOVOSGA_MD5=0d35961347251223297359fc395d6842
 
 ENV NOVOSGA_FILE=novosga.tar.gz \
     NOVOSGA_DIR=/var/www/html \
@@ -24,6 +24,7 @@ FROM php:7.1-apache
 RUN set -xe \
     && apt-get update \
     && apt-get install -y \
+        cron \
         libicu-dev \
         libxml2-dev \
         zlib1g-dev \
@@ -70,6 +71,10 @@ ENV APP_ENV=prod \
 COPY start.sh /usr/local/bin
 COPY apache2/htaccess public/.htaccess
 COPY supervisor/apache2.conf /etc/supervisor/conf.d/apache2.conf
+COPY supervisor/cron.conf /etc/supervisor/conf.d/cron.conf
 COPY supervisor/websocket.conf /etc/supervisor/conf.d/websocket.conf
+
+ADD crontab/cron /etc/cron.d/app
+RUN chmod 644 /etc/cron.d/app
 
 CMD ["start.sh"]

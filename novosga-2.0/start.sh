@@ -22,7 +22,10 @@ echo "Database is up, configuring schema"
 
 set -xe
 
-#Install/Updates the database schema
+# Copy env vars to environment file (for cron usage)
+printenv >> /etc/environment
+
+# Install/Updates the database schema
 /var/www/html/bin/console novosga:install
 
 echo "Setup done! Starting apache"
