@@ -1,4 +1,4 @@
-# NovoSGA 2.0
+# NovoSGA 2.1
 
 ## Docker image milestones
 [x] Pre-flight check
