@@ -1,0 +1,7 @@
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [QSA,L]
+PassEnv APP_ENV
+PassEnv DATABASE_URL
+PassEnv DATABASE_PASS
