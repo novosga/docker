@@ -1,0 +1,2 @@
+# m h  dom mon dow   command
+0 1 * * * root /usr/local/bin/php /var/www/html/bin/console novosga:reset > /var/log/novosga-reset.log 2>&1
