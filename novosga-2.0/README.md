@@ -2,10 +2,10 @@
 
 ## Docker image milestones
 
-[x] Pre-flight check
-[x] Auto setup
-[x] Daily ticket reset at 1am
-[ ] docker secrets support
+- [x] Pre-flight check
+- [x] Auto setup
+- [x] Daily ticket reset at 1am
+- [ ] docker secrets support
 
 ## How to use
 
