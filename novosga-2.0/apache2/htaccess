@@ -5,3 +5,5 @@ RewriteRule ^(.*)$ index.php [QSA,L]
 PassEnv APP_ENV
 PassEnv DATABASE_URL
 PassEnv DATABASE_PASS
+PassEnv TRUSTED_PROXIES
+PassEnv TRUSTED_HOSTS
