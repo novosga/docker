@@ -2,7 +2,7 @@
 FROM composer:1.7.0 AS build
 
 ENV NOVOSGA_VER=v2.0.6 \
-    NOVOSGA_MD5=70b6cf85d32e81b4788913b787f0ec35
+    NOVOSGA_MD5=8a39b39d2467715291dd705e9f8771a5
 
 ENV NOVOSGA_FILE=novosga.tar.gz \
     NOVOSGA_DIR=/var/www/html \
