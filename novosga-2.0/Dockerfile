@@ -21,6 +21,21 @@ RUN set -xe \
 
 FROM php:7.1-apache
 
+RUN curl https://packages.microsoft.com/keys/microsoft.asc |tac |tac |apt-key add - \
+  && curl https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list \
+  && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
+  && locale-gen
+
+RUN apt-get -y update
+RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17 unixodbc-dev unixodbc
+RUN apt-get install -y unixodbc-dev 
+
+RUN pear config-set php_ini `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"` system
+RUN pecl install sqlsrv
+RUN pecl install pdo_sqlsrv
+
+RUN echo "extension=sqlsrv.so\nextension=pdo_sqlsrv.so" > /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini
+
 RUN set -xe \
     && apt-get update \
     && apt-get install -y \
