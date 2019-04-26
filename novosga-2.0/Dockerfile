@@ -22,13 +22,18 @@ RUN set -xe \
 FROM php:7.1-apache
 
 RUN set -xe \
+    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+    && curl https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list \
     && apt-get update \
-    && apt-get install -y \
+    && ACCEPT_EULA=Y apt-get install -y \
         cron \
         libicu-dev \
         libxml2-dev \
         zlib1g-dev \
         supervisor \
+        msodbcsql17 \
+        unixodbc-dev \
+        unixodbc \
     && docker-php-ext-install \
         intl \
         pcntl \
@@ -36,6 +41,10 @@ RUN set -xe \
         pdo_mysql \
         xml \
         zip \
+    && pear config-set php_ini `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"` system \
+    && pecl install sqlsrv \
+    && pecl install pdo_sqlsrv \
+    && echo "extension=sqlsrv.so\nextension=pdo_sqlsrv.so" > /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini \
     && apt-get remove -y --purge \
         postgresql-server-dev-all \
         libicu-dev \
@@ -46,23 +55,6 @@ RUN set -xe \
     && a2enmod rewrite env \
     && echo 'session.save_path = "/tmp"' > /usr/local/etc/php/conf.d/sessionsavepath.ini \
     && echo 'date.timezone = ${TZ}' > /usr/local/etc/php/conf.d/datetimezone.ini
-
-#Install the requirements to use MSSQL
-RUN curl https://packages.microsoft.com/keys/microsoft.asc |tac |tac |apt-key add - \
-      && curl https://packages.microsoft.com/config/debian/9/prod.list > /etc/apt/sources.list.d/mssql-release.list \
-      && echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
-      && locale-gen \
-      && apt-get -y update \ 
-      && ACCEPT_EULA=Y apt-get install -y \
-          msodbcsql17 \
-          unixodbc-dev \
-          unixodbc \
-      && pear config-set php_ini `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"` system \
-      && pecl install sqlsrv \
-      && pecl install pdo_sqlsrv \
-      && echo "extension=sqlsrv.so\nextension=pdo_sqlsrv.so" > /usr/local/etc/php/conf.d/docker-php-ext-sqlsrv.ini \
-      && apt-get clean \
-      && rm -rf /var/lib/apt/lists/* /tmp/*
       
 COPY --from=build /var/www/html /var/www/html
 
