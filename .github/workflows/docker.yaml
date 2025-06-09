@@ -7,7 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['2.0', '2.1']
+        version:
+          - '2.0'
+          - '2.1'
+          - '2.2-standalone'
     steps:
       - name: Git Checkout
         uses: actions/checkout@v3

@@ -1,4 +1,4 @@
-# NovoSGA 2.0
+# NovoSGA 2.2
 
 ## Docker image milestones
 
@@ -29,7 +29,3 @@ You can set the system as you like with environment variables (using docker-comp
 | NOVOSGA_PRIORITY_DESCRIPTION   | Priority service  | Priority service description     | yes       |
 | NOVOSGA_PLACE_NAME             | Box               | Place name                       | yes       |
 | TZ                             | UTC               | Timezone                         | yes       |
-
-## Documentation
-
-https://novosga.org/docs/#/2.0/install-docker
