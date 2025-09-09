@@ -1,16 +1,15 @@
 name: Docker Build
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'novosga-2.1/**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        version:
-          - '2.0'
-          - '2.1'
-          - '2.2-standalone'
     steps:
       - name: Git Checkout
         uses: actions/checkout@v3
@@ -24,6 +23,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4.0.0
         with:
-          context: novosga-${{ matrix.version }}/
+          context: novosga-2.1/
           push: true
-          tags: novosga/novosga:${{ matrix.version }}
+          tags: novosga/novosga:2.1
