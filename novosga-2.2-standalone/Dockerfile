@@ -1,4 +1,4 @@
-FROM novosga/novosga:2.2.9
+FROM novosga/novosga:2.2.10
 
 #Set the default parameters
 ENV APP_ENV=prod \
