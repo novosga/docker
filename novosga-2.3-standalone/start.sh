@@ -26,4 +26,4 @@ set -xe
 bin/console novosga:install
 
 echo "Setup done! Starting application"
-exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+exec /usr/bin/supervisord -c /etc/supervisord.conf

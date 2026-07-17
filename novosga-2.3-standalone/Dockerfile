@@ -17,6 +17,8 @@ ENV APP_ENV=prod \
 
 USER root
 
+RUN apk add --no-cache supervisor
+
 # https://github.com/aptible/supercronic/releases/tag/v0.2.33
 ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.2.33/supercronic-linux-amd64 \
     SUPERCRONIC_SHA1SUM=71b0d58cc53f6bd72cf2f293e09e294b79c666d8 \
@@ -30,7 +32,7 @@ RUN curl -fsSLO "$SUPERCRONIC_URL" \
 
 COPY start.sh /usr/local/bin
 COPY consumer.sh /usr/local/bin
-COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY config/supervisord.conf /etc/supervisord.conf
 COPY config/crontab /etc/crontab
 
 USER nobody
