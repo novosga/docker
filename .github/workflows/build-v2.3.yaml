@@ -25,4 +25,4 @@ jobs:
         with:
           context: novosga-2.3-standalone/
           push: true
-          tags: novosga/novosga:2.3-dev-standalone
+          tags: novosga/novosga:2.3-standalone
